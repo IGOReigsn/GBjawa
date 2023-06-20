@@ -32,10 +32,10 @@ public class HomeWork2 {
         String strJson ="{\"name\":\"Иванов\", \"country\":\"Russia\", \"city\":\"Moscow\", \"age\":\"null\"}";
         System.out.println(strJson + "     Первоначальная JSON-строка");
         String strWhereDraft= strJson.replaceAll("\s","").
-                                    replace("{\"","").
-                                    replace("\":"," = ").
-                                    replace(",\"",", AND ").
-                                    replace("\"}","\"");
+                replace("{\"","").
+                replace("\":"," = ").
+                replace(",\"",", AND ").
+                replace("\"}","\"");
         System.out.println(strWhereDraft + "    Черновик WHERE-строки (со вспомогательными запятыми и null)");
         String[] strsplit= strWhereDraft.split(",");
         StringBuilder strBuild = new StringBuilder();
@@ -51,5 +51,35 @@ public class HomeWork2 {
        System.out.println("Итоговая WHERE-строка (на одном из диалектов SQL):");
        System.out.println(strBuild);
 // должно получаться: name = "Иванов" AND country = "Russia" AND city = "Moscow"
+        System.out.println();
+        System.out.println("ДОПОЛНИТЕЛЬНОЕ ЗАДАНИЕ :");
+
+        String strJsonAdd="[{\"фамилия\":\"Иванов\",\"оценка\":\"5\",\"предмет\":\"Математика\"}," +
+                "{\"фамилия\":\"Петрова\",\"оценка\":\"4\",\"предмет\":\"Информатика\"}," +
+                "{\"фамилия\":\"Краснов\",\"оценка\":\"5\",\"предмет\":\"Физика\"}]";
+        System.out.println(strJsonAdd);
+        String[] strsplitAdd= strJsonAdd.split("},");
+//        StringBuilder[] strBuildAdd = new StringBuilder[strsplitAdd.length];// STRINGBUILDER не нужен для решения
+        String[] strResult= new String[strsplitAdd.length];
+        for (int i=0;i < strsplitAdd.length;i++){
+//            System.out.println(strsplitAdd[i]);
+            strResult[i]=(strsplitAdd[i].
+                    replace("[{\"","").
+                    replace("{\"","").
+                    replace("фамилия\":\"","Студент ").
+                    replace("\",\"оценка\":\""," получил ").
+                    replace("\",\"предмет\":\""," по предмету ").
+                    replace("\"",".").
+                    replace("}","").
+                    replace("]",""));
+            System.out.println(strResult[i]);
+
+
+
+
+        }
+
+
+
     }
 }
