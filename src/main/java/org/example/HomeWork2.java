@@ -26,5 +26,30 @@
 //        *Дана строка: ".3 + 1.56 = " подсчитать результат и добавить к строке.
 package org.example;
 
+
 public class HomeWork2 {
+    public static void main(String[] args) {
+        String strJson ="{\"name\":\"Иванов\", \"country\":\"Russia\", \"city\":\"Moscow\", \"age\":\"null\"}";
+        System.out.println(strJson + "     Первоначальная JSON-строка");
+        String strWhereDraft= strJson.replaceAll("\s","").
+                                    replace("{\"","").
+                                    replace("\":"," = ").
+                                    replace(",\"",", AND ").
+                                    replace("\"}","\"");
+        System.out.println(strWhereDraft + "    Черновик WHERE-строки (со вспомогательными запятыми и null)");
+        String[] strsplit= strWhereDraft.split(",");
+        StringBuilder strBuild = new StringBuilder();
+        for (int i=0;i < strsplit.length;i++){
+//            System.out.println(strsplit[i]);
+            if(strsplit[i].indexOf("null")==-1){
+                strBuild.append(strsplit[i]);
+            }
+        }
+        if(strBuild.substring(0,5).equals(" AND ")){//если первое условие= null, убираем из строки ведущий " AND "
+            strBuild.delete(0,5);
+        }
+       System.out.println("Итоговая WHERE-строка (на одном из диалектов SQL):");
+       System.out.println(strBuild);
+// должно получаться: name = "Иванов" AND country = "Russia" AND city = "Moscow"
+    }
 }
