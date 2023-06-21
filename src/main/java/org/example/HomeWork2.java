@@ -26,7 +26,6 @@
 //        *Дана строка: ".3 + 1.56 = " подсчитать результат и добавить к строке.
 package org.example;
 
-
 public class HomeWork2 {
     public static void main(String[] args) {
         String strJson ="{\"name\":\"Иванов\", \"country\":\"Russia\", \"city\":\"Moscow\", \"age\":\"null\"}";
@@ -52,34 +51,67 @@ public class HomeWork2 {
        System.out.println(strBuild);
 // должно получаться: name = "Иванов" AND country = "Russia" AND city = "Moscow"
         System.out.println();
-        System.out.println("ДОПОЛНИТЕЛЬНОЕ ЗАДАНИЕ :");
+        System.out.println("ДОПОЛНИТЕЛЬНЫЕ ЗАДАНИЯ :");
+        parsJsonAdd();
+        System.out.println();
+        tester();
+        System.out.println();
+        calc();
 
+
+    }
+    static void  parsJsonAdd() {     // ОПЕРАЦИИ С ФАЙЛОМ НЕ СДЕЛАНЫ :-(
         String strJsonAdd="[{\"фамилия\":\"Иванов\",\"оценка\":\"5\",\"предмет\":\"Математика\"}," +
                 "{\"фамилия\":\"Петрова\",\"оценка\":\"4\",\"предмет\":\"Информатика\"}," +
                 "{\"фамилия\":\"Краснов\",\"оценка\":\"5\",\"предмет\":\"Физика\"}]";
         System.out.println(strJsonAdd);
         String[] strsplitAdd= strJsonAdd.split("},");
-//        StringBuilder[] strBuildAdd = new StringBuilder[strsplitAdd.length];// STRINGBUILDER не нужен для решения
+        //        StringBuilder[] strBuildAdd = new StringBuilder[strsplitAdd.length];// STRINGBUILDER не нужен для решения
         String[] strResult= new String[strsplitAdd.length];
-        for (int i=0;i < strsplitAdd.length;i++){
-//            System.out.println(strsplitAdd[i]);
-            strResult[i]=(strsplitAdd[i].
-                    replace("[{\"","").
-                    replace("{\"","").
-                    replace("фамилия\":\"","Студент ").
-                    replace("\",\"оценка\":\""," получил ").
-                    replace("\",\"предмет\":\""," по предмету ").
-                    replace("\"",".").
-                    replace("}","").
-                    replace("]",""));
+        for (int i=0;i < strsplitAdd.length;i++) {
+            //            System.out.println(strsplitAdd[i]);
+            strResult[i] = (strsplitAdd[i].
+                    replace("[{\"", "").
+                    replace("{\"", "").
+                    replace("фамилия\":\"", "Студент ").
+                    replace("\",\"оценка\":\"", " получил ").
+                    replace("\",\"предмет\":\"", " по предмету ").
+                    replace("\"", ".").
+                    replace("}", "").
+                    replace("]", ""));
             System.out.println(strResult[i]);
-
-
-
-
         }
-
-
-
+    }
+    static void tester(){
+        System.out.println("Сравнить время выполнения замены символа \"а\" на \"А\" любой строки содержащей >1000 символов средствами String и StringBuilder.");
+        StringBuilder testStringBuilder=new StringBuilder();
+        String testString;
+        for (int i=0;i<20000;i++){testStringBuilder.append("a");}
+        testString=testStringBuilder.toString();
+        long start1=System.currentTimeMillis();
+        System.out.println("Исходная строка: "+ testStringBuilder);
+        for (int i=0;i<testStringBuilder.length();i++){
+            testStringBuilder.replace(i,i+1,"A");
+        }
+        System.out.println("StringBuilder : "+testStringBuilder);
+        System.out.println("StringBuilder : time= " + (System.currentTimeMillis()-start1) +"ms");
+        start1=System.currentTimeMillis();
+        String resultString = testString.replace("a","A");// для аналогичности: сохраненный результат, как в StringBuilder
+        System.out.println("String : "+ resultString);
+        System.out.println("String : time= " + (System.currentTimeMillis()-start1) +"ms");// примерно в 6-10 раз String быстрее
+    }
+    static void calc() {
+        System.out.println(" *Дана строка: \".3 + 1.56 = \" подсчитать результат и добавить к строке.");
+        String taskStr=".3 + 1.56 = ";
+        String[] strSplit2=taskStr.replace(" +","X").//заменили проблемный символ "+" на "беспроблемный"(другое решение БЫСТРО не нашлось)
+                replaceAll("\s","").
+                replace("=","").
+                split("X");
+        float res =0;
+        for (int i=0; i< strSplit2.length; i++){
+        //    System.out.println(strSplit2[i]);
+            res=res+Float.parseFloat(strSplit2[i]);// можно, наверное еще округлить (но сейчас нет времени).
+        }
+        System.out.println(taskStr+res);
     }
 }
