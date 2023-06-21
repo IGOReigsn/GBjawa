@@ -6,7 +6,9 @@
 //        *реализовать сортировку по возрасту и полу с использованием индексов
 package org.example;
 public class HomeWork4 {
+    public static void main(String[] args) {
 
+    }
 
 
 
