@@ -51,17 +51,11 @@ public class HomeWork4 {
               return age.get(o1)-age.get(o2);
             }
         });
-        System.out.println("Отсортированный список:");
+        System.out.println("Отсортированный (по увеличению возраста) список:");
         for (int i:id) {System.out.println(name.get(i)+" "+age.get(i)+" "+gender.get(i));}
- /*       Collections.sort(id, new Comparator<Integer>(){
-            public int compare( Integer o1, Integer o2){
-                return (age.get(o2)+(if(gender.get(o2)=="f"){200;});)-age.get(o1)+100;
-            }
-        });
-        for (int i:id) {System.out.println(name.get(i)+" "+age.get(i)+" "+gender.get(i));}
-*/
+
         Collections.sort(id,(o1,o2)->age.get(o2)-age.get(o1));
-        System.out.println("Обратная сортировка:");
+        System.out.println("Обратная (по уменьшению возраста) сортировка:");
         for (int i:id) {System.out.println(name.get(i)+" "+age.get(i)+" "+gender.get(i));}
     }
 
