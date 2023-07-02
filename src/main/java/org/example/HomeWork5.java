@@ -11,7 +11,6 @@ package org.example;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashMap;
 
 public class HomeWork5 {
@@ -28,19 +27,14 @@ public class HomeWork5 {
         for(String s: map.keySet()){
             list.add(s);
         }
-        Collections.sort(list, new Comparator<String>() {
-            @Override
-            public int compare(String o1, String o2) {
-                return map.get(o2).size()-map.get(o1).size();
-            }
-        });
+        Collections.sort(list,(o1,o2)->map.get(o2).size()-map.get(o1).size());
         System.out.println("Отсортированный список: "+list);
         System.out.println();
         System.out.println("Подробный отсортированный список :");
         list.forEach(n-> System.out.println(n+" : "+ "телефонов = "+map.get(n).size()+"  "+ map.get(n)+" )"));
-    };
+    }
     private static void addphone(HashMap<String,ArrayList<String>> map,String name,String phone){
             map.putIfAbsent(name, new ArrayList<>());
             map.get(name).add(phone);
-    };
+    }
 }
